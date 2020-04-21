@@ -7,17 +7,17 @@ PdfToImage package will help you convert the PDF files into Images.
 Run
 ```
 cd pdfToImage
-python install setup.py
+python setup.py install
 ```
 
 ### How to use?
 Run
 ```
-pdfToImage [path_to_pdf_file] [path_to_store_images]
+pdfToImage '/path/to/your/pdf-file.pdf' '/path/to/your/convert/images'
 ```
 
 ### Example
 Run
 ```
-pdfToImage "D:\Office-Project-GitHub\Policy-Declaration\Policy_Dec_Form\database\Policy_Checklist.pdf" "D:\Office-Project-GitHub\Policy-Declaration\Policy_Dec_Form\database\Policy_Checklist.pdf"
+pdfToImage "D:\Office-Project-GitHub\Policy-Declaration\Policy_Dec_Form\database\Policy_Checklist.pdf" "D:\Office-Project-GitHub\Policy-Declaration\Policy_Dec_Form\database"
 ```
