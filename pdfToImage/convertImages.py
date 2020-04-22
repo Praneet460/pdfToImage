@@ -39,8 +39,6 @@ def convrt_img(path_to_pdf_file:str, path_to_img_files:str, resolution:int = 300
     try:
         with WandImage(filename = path_to_pdf_file, resolution = resolution) as pdf:
             
-            
-
             for index, image in enumerate(tqdm(pdf.sequence)):
                 
                 image.background_color = Color('white')
