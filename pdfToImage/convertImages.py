@@ -7,6 +7,7 @@
 try:
     # third-party package
     from wand.image import Image as WandImage
+    from wand.color import Color
     from wand.exceptions import WandException
     from tqdm import tqdm 
 except ModuleNotFoundError:
@@ -37,8 +38,14 @@ def convrt_img(path_to_pdf_file:str, path_to_img_files:str, resolution:int = 300
 
     try:
         with WandImage(filename = path_to_pdf_file, resolution = resolution) as pdf:
+            
+            
 
             for index, image in enumerate(tqdm(pdf.sequence)):
+                
+                image.background_color = Color('white')
+                image.alpha_channel = 'remove'    
+                
                 jpeg_image = WandImage(image = image).convert('jpeg')
 
                 if not index <= 9:

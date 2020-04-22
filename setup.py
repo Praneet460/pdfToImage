@@ -17,11 +17,12 @@ README = (HERE / "README.md").read_text()
 # call setup()
 setup(
     name = "pdfToImage",
-    version = "1.0.1",
+    version = "1.0.2",
     description = "PDF file to Images conversion",
     long_description = README,
     long_description_content_type = "text/markdown",
     author = "Praneet Nigam",
+    url = "https://github.com/Praneet460/pdfToImage",
     author_email = "nigampraneet460@gmail.com",
     classifiers = [
         "Programming Language :: Python :: 3",
