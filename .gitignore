@@ -2,3 +2,5 @@ pdfToImage/__pycache__/
 build/
 dist/
 pdfToImage.egg-info/
+venv/
+.eggs/

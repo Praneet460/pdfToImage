@@ -4,6 +4,15 @@
 # AUTHOR : PRANEET NIGAM
 ##########################
 
+"""
+python setup.py --help install # to know how to customize the install procedure
+python setup.py --help-commands
+python setup.py clean # clean all trash (*.pyc and stuff)
+python setup.py test  # run the complete test suite
+python setup.py bench # run the complete benchmark suite
+python setup.py audit # run pyflakes checker on source code
+"""
+
 # built-in packages
 import pathlib
 from setuptools import setup
@@ -24,6 +33,8 @@ setup(
     author = "Praneet Nigam",
     url = "https://github.com/Praneet460/pdfToImage",
     author_email = "nigampraneet460@gmail.com",
+    include_package_data = True,
+    python_requires = ">=3.5",
     classifiers = [
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7"
@@ -35,5 +46,4 @@ setup(
             "pdfToImage = pdfToImage.__main__:main"
         ]
     }
-
 )
