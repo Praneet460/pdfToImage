@@ -26,7 +26,7 @@ README = (HERE / "README.md").read_text()
 # call setup()
 setup(
     name = "pdfToImage",
-    version = "1.0.2",
+    version = "1.1.2",
     description = "PDF file to Images conversion",
     long_description = README,
     long_description_content_type = "text/markdown",

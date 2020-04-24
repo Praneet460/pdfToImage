@@ -47,9 +47,11 @@ def convrt_img(path_to_pdf_file:str, path_to_img_files:str, resolution:int = 300
                 jpeg_image = WandImage(image = image).convert('jpeg')
 
                 if not index <= 9:
-                    jpeg_image.save(filename = f"{path_to_img_files}/{pdf_name}/{index}_{pdf_name}.jpeg")
+                    img_name = "{}_{}.jpeg".format(index, pdf_name)
+                    jpeg_image.save(filename = str(os.path.join(path_to_img_files, pdf_name, img_name)))
                 else:
-                    jpeg_image.save(filename = f"{path_to_img_files}/{pdf_name}/0{index}_{pdf_name}.jpeg")
+                    img_name = "0{}_{}.jpeg".format(index, pdf_name)
+                    jpeg_image.save(filename = str(os.path.join(path_to_img_files, pdf_name, img_name)))
     
     except WandException as exe:
         print(exe)

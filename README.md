@@ -19,8 +19,14 @@ pdfToImage '/path/to/your/pdf-file.pdf' '/path/to/your/convert/images'
 
 ### Example
 Run
+- <b>Example 1</b>
 ```
 pdfToImage "D:\Office-Project-GitHub\Policy-Declaration\Policy_Dec_Form\database\Policy_Checklist.pdf" "D:\Office-Project-GitHub\Policy-Declaration\Policy_Dec_Form\database"
+```
+
+- <b>Example 2</b>
+```
+pdfToImage "https://d1.awsstatic.com/whitepapers/migrating-magento-to-aws.pdf" "D:\Office-Project-GitHub\Policy-Declaration\Policy_Dec_Form\database"
 ```
 
 ### How to Test locally?
