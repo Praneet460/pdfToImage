@@ -5,19 +5,23 @@
 ##########################
 
 # pdfToImage packages
-from pdfToImage.utils import is_valid_url, download_url
+from pdfToImage.utils import is_valid_url, download_url, get_file_name_without_extension, get_file_name
 from pdfToImage.convertImages import convrt_img
 
 # third-party packages
-from PyPDF2 import PdfFileReader
+from PyPDF2 import PdfFileReader, PdfFileWriter
+from wand.image import Image as WandImage
+from wand.color import Color
 
 # built-in package
+import io
+import os
 from datetime import datetime
 
 
 class PDFHandler(object):
 
-    def __init__(self, filepath, pages = 'all', password = None):
+    def __init__(self, filepath:str, pages:str = 'all', password:str = None):
 
         if is_valid_url(filepath):
             filepath = download_url(filepath)
@@ -26,12 +30,13 @@ class PDFHandler(object):
         if not filepath.lower().endswith(".pdf"):
             raise NotImplementedError("File format nor supported")
         
-        self.pages = self._get_pages(self.filepath, pages)
-        
         if password is None:
             self.password = ""
         else:
             self.password = password
+
+        self.pages = self._get_pages(self.filepath, pages)
+        
 
 
     def _get_pages(self, filepath, pages):
@@ -112,13 +117,45 @@ class PDFHandler(object):
         return meta_info_data
 
     def convert2img(self, path_to_save_img):
-        convrt_img(self.filepath, path_to_save_img)
+
+        file_name = get_file_name_without_extension(self.filepath)
+
+        if not os.path.exists(path_to_save_img):
+            os.makedirs(path_to_save_img)
+                
+        if not os.path.exists(f'{path_to_save_img}/{file_name}'):
+            os.makedirs(f'{path_to_save_img}/{file_name}')
+
+        with open(self.filepath, 'rb') as file:
+            
+            # initialize the PDF reader object
+            reader = PdfFileReader(file) 
+            
+            if reader.isEncrypted:
+                reader.decrypt(self.password)
+
+                base_file_name = get_file_name(self.filepath)
+                temp_file_loc = os.path.join(path_to_save_img, file_name, base_file_name)
+
+                with open(temp_file_loc, 'wb') as pdf_file:
+                    writer = PdfFileWriter()
+                    for page in range(reader.getNumPages()):
+                        writer.addPage(reader.getPage(page))
+                    writer.write(pdf_file)
+                
+                convrt_img(temp_file_loc, path_to_save_img)
+
+                os.remove(temp_file_loc)
+            
+            else:
+                convrt_img(self.filepath, path_to_save_img)
 
 
 if __name__ == "__main__":
     # D:/Office-Project-GitHub/Policy-Declaration/Policy_Dec_Form/database/Policy_Checklist.pdf
     # https://d1.awsstatic.com/whitepapers/migrating-magento-to-aws.pdf
     p = PDFHandler(filepath="https://d1.awsstatic.com/whitepapers/migrating-magento-to-aws.pdf")
+    # print(type(p.password))
     print(p.info())
     print(p.pages)
     p.convert2img('D:/Office-Project-GitHub/Policy-Declaration/Policy_Dec_Form/database/')

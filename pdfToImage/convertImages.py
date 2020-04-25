@@ -30,11 +30,11 @@ def convrt_img(path_to_pdf_file:str, path_to_img_files:str, resolution:int = 300
     
     pdf_name = get_file_name_without_extension(path_to_pdf_file)
 
-    if not os.path.exists(path_to_img_files):
-        os.makedirs(path_to_img_files)
+    # if not os.path.exists(path_to_img_files):
+    #     os.makedirs(path_to_img_files)
                 
-    if not os.path.exists(f'{path_to_img_files}/{pdf_name}'):
-        os.makedirs(f'{path_to_img_files}/{pdf_name}')
+    # if not os.path.exists(f'{path_to_img_files}/{pdf_name}'):
+    #     os.makedirs(f'{path_to_img_files}/{pdf_name}')
 
     try:
         with WandImage(filename = path_to_pdf_file, resolution = resolution) as pdf:
