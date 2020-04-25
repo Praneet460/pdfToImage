@@ -21,9 +21,10 @@ def main():
     if args:
         path_to_pdf = args[0]
         path_to_img = args[1]
+        
 
         p = PDFHandler(filepath = path_to_pdf)
-        convrt_img(p.filepath, path_to_img)
+        p.convert2img(path_to_save_img = path_to_img)
         
         if os.path.dirname(p.filepath).endswith("Temp"):
             remove_file(p.filepath)
